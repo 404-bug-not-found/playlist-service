@@ -15,3 +15,11 @@ include::{snippets}/AddEntry/http-request.adoc[]
 
 .response
 include::{snippets}/AddEntry/http-response.adoc[]
+
+AddPlayListEntry
+
+.request
+include::{snippets}/AddPlayListEntry/http-request.adoc[]
+
+.response
+include::{snippets}/AddPlayListEntry/http-response.adoc[]
