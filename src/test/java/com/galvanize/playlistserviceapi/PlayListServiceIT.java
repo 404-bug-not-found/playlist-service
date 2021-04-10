@@ -1,6 +1,7 @@
 package com.galvanize.playlistserviceapi;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galvanize.playlistserviceapi.dto.PlayListDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -50,8 +51,8 @@ public class PlayListServiceIT {
                 //.content("{\"name\":\"First\",\"song\":\"Song\"}"))
                 .content(objectMapper.writeValueAsString(playListDto)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("name").value("First"))
-                .andExpect(jsonPath("song").value("Song"))
+                .andExpect(jsonPath("name").value("Classic"))
+                .andExpect(jsonPath("song").value("Summer of 69"))
                 .andDo(print());
 
     }

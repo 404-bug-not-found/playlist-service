@@ -1,6 +1,7 @@
 package com.galvanize.playlistserviceapi.controller;
 
 
+import com.galvanize.playlistserviceapi.dto.PlayListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ public class PlayListController {
 
     @PostMapping("addentry")
     @ResponseStatus(HttpStatus.CREATED)
-    public String addNewPlayListEntry(@RequestBody String input) throws Exception{
-        return input;
+    public PlayListDto addNewPlayListEntry(@RequestBody PlayListDto playListDto) throws Exception{
+        return playListDto;
     }
 
 
