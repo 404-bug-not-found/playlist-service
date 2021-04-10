@@ -36,4 +36,11 @@ public class PlayListController {
         return playListService.addPlayList(playListDto);
     }
 
+
+    @PostMapping("addsong")
+    public ResponseEntity<?> addNewSong(@RequestBody PlayListDto playListDto) throws Exception{
+
+        return playListService.addSong(playListDto);
+    }
+
 }

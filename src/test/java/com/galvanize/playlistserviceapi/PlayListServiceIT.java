@@ -42,7 +42,6 @@ public class PlayListServiceIT {
                 .andExpect(jsonPath("length()").value(0))
                 .andDo(print());
 
-
     }
 
     @Test
@@ -98,5 +97,42 @@ public class PlayListServiceIT {
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("AddPlayListEntry"));
+    }
+
+
+    @Test
+    void postPlayListSongTest() throws Exception{
+
+        PlayListDto playListDto = new PlayListDto("Classic","");
+
+        mockMvc.perform(post("/playlists/addplaylist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(playListDto)))
+                .andExpect(status().isCreated())
+                .andDo(print())
+                .andDo(document("AddPlayListEntry"));
+
+        PlayListDto playListDto2 = new PlayListDto("Classic","Song1");
+
+        mockMvc.perform(post("/playlists/addsong")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(playListDto2)))
+                .andExpect(status().isCreated())
+                .andDo(print())
+                .andDo(document("AddSongEntry"));
+    }
+
+
+    @Test
+    void postPlayListSongFailTest() throws Exception{
+
+        PlayListDto playListDto = new PlayListDto("Classic1","Song1");
+
+        mockMvc.perform(post("/playlists/addsong")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(playListDto)))
+                .andExpect(status().isConflict())
+                .andDo(print())
+                .andDo(document("AddSongEntry"));
     }
 }

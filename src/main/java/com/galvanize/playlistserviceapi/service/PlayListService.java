@@ -48,6 +48,30 @@ public class PlayListService {
         }
     }
 
+
+    public ResponseEntity<?> addSong(PlayListDto playListDto) {
+
+        CustomMessage message = new CustomMessage();
+
+        Optional<PlayListEntity> playListExists = playListRepository.findAll()
+                .stream()
+                .filter(playListEntity -> playListEntity.getName().equals(playListDto.getName()))
+                .findAny();
+
+        if (playListExists.isPresent()) {
+            playListRepository.save(new PlayListEntity(playListDto.getName(), playListDto.getSong()));
+            message.setMessage(playListDto.getSong()+" Song Added Successfully");
+            return new ResponseEntity<CustomMessage>(message, HttpStatus.CREATED);
+
+        } else {
+
+            message.setMessage(playListDto.getName()+" Playlist Does Not Exists");
+            return new ResponseEntity<CustomMessage>(message, HttpStatus.CONFLICT);
+        }
+    }
+
+
+
     public List<PlayListDto> getEntries(){
         return playListRepository.findAll()
                 .stream()
@@ -56,5 +80,7 @@ public class PlayListService {
                 })
                 .collect(Collectors.toList());
     }
+
+
 
 }
