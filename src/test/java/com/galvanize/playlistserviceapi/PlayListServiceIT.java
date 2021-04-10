@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -52,7 +55,8 @@ public class PlayListServiceIT {
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("name").value("Classic"))
                 .andExpect(jsonPath("song").value("Summer of 69"))
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("AddEntry"));
     }
 
     @Test
@@ -77,7 +81,11 @@ public class PlayListServiceIT {
                 get("/playlists"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(2))
-                .andDo(print());
+                .andDo(print())
+                .andDo(document("PlayList",responseFields(
+                        fieldWithPath("[1].name").description("Classic"),
+                        fieldWithPath("[1].song").description("Country Road Take me Home")
+                )));
 
     }
 }
