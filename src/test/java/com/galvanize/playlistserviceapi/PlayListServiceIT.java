@@ -44,9 +44,11 @@ public class PlayListServiceIT {
     @Test
     void postPlayListTest() throws Exception{
 
+        PlayListDto playListDto = new PlayListDto("Classic","Summer of 69");
         mockMvc.perform(post("/playlists/addentry")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"First\",\"song\":\"Song\"}"))
+                //.content("{\"name\":\"First\",\"song\":\"Song\"}"))
+                .content(objectMapper.writeValueAsString(playListDto)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("name").value("First"))
                 .andExpect(jsonPath("song").value("Song"))
