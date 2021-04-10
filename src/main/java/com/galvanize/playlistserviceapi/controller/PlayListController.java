@@ -23,12 +23,12 @@ public class PlayListController {
         return playListService.getEntries();
     }
 
-    @PostMapping("addentry")
+/*    @PostMapping("addentry")
     @ResponseStatus(HttpStatus.CREATED)
     public void addNewPlayListEntry(@RequestBody PlayListDto playListDto) throws Exception{
 
         playListService.addEntry(playListDto);
-    }
+    }*/
 
     @PostMapping("addplaylist")
     public ResponseEntity<?> addNewPlayList(@RequestBody PlayListDto playListDto) throws Exception{

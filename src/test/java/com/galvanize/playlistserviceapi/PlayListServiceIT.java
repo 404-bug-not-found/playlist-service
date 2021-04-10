@@ -44,7 +44,7 @@ public class PlayListServiceIT {
 
     }
 
-    @Test
+/*    @Test
     void postPlayListTest() throws Exception{
 
         PlayListDto playListDto = new PlayListDto("Classic","Summer of 69");
@@ -54,37 +54,8 @@ public class PlayListServiceIT {
                 .andExpect(status().isCreated())
                 .andDo(print())
                 .andDo(document("AddEntry"));
-    }
+    }*/
 
-    @Test
-    void getMultiplePlayListTest() throws Exception{
-
-        PlayListDto input1 = new PlayListDto("Classic","Summer of 69");
-        PlayListDto input2 = new PlayListDto("Classic","Country Road Take me Home");
-
-        mockMvc.perform(post("/playlists/addentry")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(input1)))
-                .andExpect(status().isCreated())
-                .andDo(print());
-
-        mockMvc.perform(post("/playlists/addentry")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(input2)))
-                .andExpect(status().isCreated())
-                .andDo(print());
-
-        mockMvc.perform(
-                get("/playlists"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("length()").value(2))
-                .andDo(print())
-                .andDo(document("PlayList",responseFields(
-                        fieldWithPath("[1].name").description("Classic"),
-                        fieldWithPath("[1].song").description("Country Road Take me Home")
-                )));
-
-    }
 
     @Test
     void postPlayListNameTest() throws Exception{
@@ -134,5 +105,38 @@ public class PlayListServiceIT {
                 .andExpect(status().isConflict())
                 .andDo(print())
                 .andDo(document("AddSongEntry"));
+    }
+
+    @Test
+    void getMultiplePlayListTest() throws Exception{
+
+        PlayListDto input1 = new PlayListDto("Classic1","");
+        PlayListDto input2 = new PlayListDto("Classic1","Country Road Take me Home1");
+
+        PlayListDto input3 = new PlayListDto("Classic2","");
+        PlayListDto input4 = new PlayListDto("Classic2","Country Road Take me Home2");
+
+        mockMvc.perform(post("/playlists/addplaylist")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input1)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        mockMvc.perform(post("/playlists/addsong")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input2)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        mockMvc.perform(
+                get("/playlists"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2))
+                .andDo(print())
+                .andDo(document("PlayList",responseFields(
+                        fieldWithPath("[0].name").description("Classic1"),
+                        fieldWithPath("[0].song").description("Country Road Take me Home1")
+                )));
+
     }
 }
