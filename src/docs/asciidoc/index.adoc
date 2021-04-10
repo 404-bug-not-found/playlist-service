@@ -23,3 +23,11 @@ include::{snippets}/AddPlayListEntry/http-request.adoc[]
 
 .response
 include::{snippets}/AddPlayListEntry/http-response.adoc[]
+
+AddSongEntry
+
+.request
+include::{snippets}/AddSongEntry/http-request.adoc[]
+
+.response
+include::{snippets}/AddSongEntry/http-response.adoc[]
