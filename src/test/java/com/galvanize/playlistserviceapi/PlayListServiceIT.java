@@ -53,8 +53,6 @@ public class PlayListServiceIT {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(playListDto)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("name").value("Classic"))
-                .andExpect(jsonPath("song").value("Summer of 69"))
                 .andDo(print())
                 .andDo(document("AddEntry"));
     }

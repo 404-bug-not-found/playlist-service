@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("playlists")
 public class PlayListController {
@@ -15,9 +17,9 @@ public class PlayListController {
     PlayListService playListService;
 
     @GetMapping
-    public String getPlayList(){
+    public List<PlayListDto> getPlayList(){
 
-        return "[]";
+        return playListService.getEntries();
     }
 
     @PostMapping("addentry")
