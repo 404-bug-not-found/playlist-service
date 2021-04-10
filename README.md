@@ -32,3 +32,7 @@ Plugins: Lombok
 
 Rest documentation of end point details can be found at this url : https://playlist-service-01.herokuapp.com/docs/index.html
 
+# **TODO List for Next Sprint:**
+
+1. Update Playlist entity with List<String> of songs, so multiple songs added to same PlayList can be stored in same PlayList object.
+2. Add more feature for remaining acceptance criteria and more tests for them.
