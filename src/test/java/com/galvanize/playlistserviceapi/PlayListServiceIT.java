@@ -48,11 +48,35 @@ public class PlayListServiceIT {
         PlayListDto playListDto = new PlayListDto("Classic","Summer of 69");
         mockMvc.perform(post("/playlists/addentry")
                 .contentType(MediaType.APPLICATION_JSON)
-                //.content("{\"name\":\"First\",\"song\":\"Song\"}"))
                 .content(objectMapper.writeValueAsString(playListDto)))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("name").value("Classic"))
                 .andExpect(jsonPath("song").value("Summer of 69"))
+                .andDo(print());
+    }
+
+    @Test
+    void getMultiplePlayListTest() throws Exception{
+
+        PlayListDto input1 = new PlayListDto("Classic","Summer of 69");
+        PlayListDto input2 = new PlayListDto("Classic","Country Road Take me Home");
+
+        mockMvc.perform(post("/playlists/addentry")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input1)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        mockMvc.perform(post("/playlists/addentry")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(input2)))
+                .andExpect(status().isCreated())
+                .andDo(print());
+
+        mockMvc.perform(
+                get("/playlists"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("length()").value(2))
                 .andDo(print());
 
     }
