@@ -44,7 +44,7 @@ public class PlayListServiceIT {
     @Test
     void postPlayListTest() throws Exception{
 
-        mockMvc.perform(post("/addentry")
+        mockMvc.perform(post("/playlists/addentry")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"First\",\"song\":\"Song\"}"))
                 .andExpect(status().isCreated())
