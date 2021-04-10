@@ -32,7 +32,7 @@ public class PlayListServiceIT {
     void getPlayListTest() throws Exception {
 
         mockMvc.perform(
-                get("/playlist"))
+                get("/playlists"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("length()").value(0))
                 .andDo(print());
