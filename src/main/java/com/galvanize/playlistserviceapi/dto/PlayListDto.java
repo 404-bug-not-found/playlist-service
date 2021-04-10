@@ -17,7 +17,6 @@ public class PlayListDto {
     public PlayListDto(String n, String s){
         this.name = n;
         this.song = s;
-
     }
 
 }
