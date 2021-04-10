@@ -8,13 +8,6 @@ include::{snippets}/PlayList/http-request.adoc[]
 .response
 include::{snippets}/PlayList/http-response.adoc[]
 
-AddEntry
-
-.request
-include::{snippets}/AddEntry/http-request.adoc[]
-
-.response
-include::{snippets}/AddEntry/http-response.adoc[]
 
 AddPlayListEntry
 
